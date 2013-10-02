@@ -1609,7 +1609,7 @@ border: solid;
     border-image: url("darkelements/border-passive.png") 2 2 2 2 / 2px 2px 2px 2px stretch;
     background-image:none;
     border-width: 2px;
-    background-color: #4A90D9;
+    background-color: @switch_color;
     color:#000000;
 background-size: 100% 100%;
 }
@@ -1617,7 +1617,7 @@ GtkSwitch.trough{
 border: solid;
     border-image: url("darkelements/border-passive.png") 2 2 2 2 / 2px 2px 2px 2px stretch;
     border-width: 2px;
-    background-color: #4A90D9;
+    background-color: @switch_color;
     color:#000000;
     background-image:none;
 }
