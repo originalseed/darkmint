@@ -62,7 +62,8 @@ GtkImage {
 background-color: @transparent;
 }
 * {
-    background-color: @theme_bg_color;
+	    /* problems with gnome3 shell, desktop background image overlayed  */	
+    /*background-color: @theme_bg_color;*/
 
 }
 
