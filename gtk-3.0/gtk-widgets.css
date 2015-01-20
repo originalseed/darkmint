@@ -9,7 +9,7 @@
 * {
     engine: none;
     padding: 1px;
-color: @theme_text_color;
+    color: @theme_text_color;
     /* Style properties */
     -GtkToolButton-icon-spacing: 1px;
 
@@ -97,7 +97,8 @@ GtkLabel,
 GtkLabel:insensitive {
     background-color: transparent;
 }
-.button{
+.button,
+.button:selected{
     padding: 3px;
     color: @theme_text_color;
 border: solid;
@@ -586,9 +587,22 @@ padding: 3px 0 3px 4px;
 
 
 .notebook tab .button {
-padding: 0;
+	padding: 0;
+	background-image: none;
+	border-image: none;
+	border-width:2px;
+	background-color: transparent;
+	border-color: transparent;
 }
-
+.notebook tab .button:hover,
+.notebook tab .button:active,
+.notebook tab .button:selected{
+border: solid;
+    background-image: url("darkelements/button-hover.png");
+    border-image: url("darkelements/button-hover-border.png") 2 2 2 2 / 2px 2px 2px 2px stretch stretch;
+    border-width:2px;
+	background-size: 100% 100%;
+}
 
 
 /**************
@@ -801,8 +815,10 @@ margin:10px;
 GtkTreeMenu .menuitem,
 GtkTreeMenu .menuitem * {
     color: @theme_text_color;
-border: solid;	
-
+	border: solid alpha(black, 0);	
+border-width: 2px;
+    padding: 0;
+background-color: transparent;
 }
 
 GtkTreeMenu .menuitem:prelight,
@@ -878,14 +894,14 @@ GtkMenu {
 -GtkMenu-vertical-offset: -2px;
 -GtkMenu-shadow-type: none;
 -GtkWidget-wide-seperators: 1;
-border: 1px solid #ff0000; /* if you see this read you did not override it */
+border: 1px solid #ff0000; /* if you see this in red you did not override it */
 }
 
 .menubar > .menuitem {
 engine: adwaita;
     -GtkArrow-shadow-style:none;
--GtkArrow-arrow-scaling:0.6;
--GtkMenuItem-arrow-scaling:0.6;
+-GtkArrow-arrow-scaling:0.4;
+-GtkMenuItem-arrow-scaling:0.4;
 padding: 0 4px 0 4px;
 
 }
@@ -1361,6 +1377,7 @@ background-size: 100% 100%;
     background-image: none;
     background-color: transparent;
 border-color: transparent;
+background-image: url("darkelements/column-header.png");
 }
 
 .toolbar .raised .button:hover,
@@ -1424,10 +1441,7 @@ border-color: transparent;
     icon-shadow: none;
 }
 
-.toolbar .raised.linked.button:nth-child(first),
-.toolbar .raised.linked.button:active:nth-child(first),
-.toolbar .raised.linked:nth-child(first) .button,
-.toolbar .raised.linked:nth-child(first) .button:active {
+.toolbar .raised.linked.button:active:nth-child(first) {
 border: solid;
     background-image: url("darkelements/button-hover.png");
     border-image: url("darkelements/button-hover-border.png") 2 2 2 2 / 2px 2px 2px 2px stretch stretch;
@@ -1435,7 +1449,10 @@ border: solid;
     box-shadow: none;
 background-size: 100% 100%;
 }
-
+.toolbar .raised.linked.button:insensitive:nth-child(first),
+.toolbar .raised.linked:nth-child(first) .button:insensitive {
+	   background-image: url("darkelements/column-header.png");
+}
 .toolbar .raised.linked.button:nth-child(last),
 .toolbar .raised.linked.button:active:nth-child(last),
 .toolbar .raised.linked:nth-child(last) .button,
@@ -1634,9 +1651,12 @@ background-size: 100% 100%;
 GtkSwitch.slider:active,
 GtkSwitch.slider:hover{
 border: solid;
-    background-image: url("darkelements/button-normal.png");
+	border: solid;
+        background-image: url("darkelements/button-hover.png");
+    border-image: url("darkelements/button-hover-border.png") 2 2 2 2 / 2px 2px 2px 2px stretch;
     border-width: 2px;
-background-size: 100% 100%;
+	border-color: transparent;
+	background-size: 100% 100%;
 }
 
 GtkSwitch.trough:insensitive {
@@ -1955,4 +1975,316 @@ GsmFailWhaleDialog {
 GsmFailWhaleDialog * {
     background-color: @os_chrome_bg_color;
     background-image: none;
+}
+
+/********* gtk 3.14 ******************/
+.header-bar,
+.header-bar .toolbar,
+.titlebar,
+.action-bar,
+.primary-toolbar {
+	background-color: #000000;
+	background-size: 100% 100%;
+	border: solid;
+    border-image: url("darkelements/tab-top.png") 20 2 0 2 / 20px 2px 0 2px stretch stretch;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.header-bar .title,
+.header-bar .subtitle{
+ color:@selected_fg_color;
+}
+.header-bar .title:backdrop,
+.header-bar .subtitle:backdrop{
+ color:@insensitive_fg_color;
+}
+.header-bar .title{
+	font-weight:bold;
+}
+.header-bar .subtitle{
+	font-size: 90%;
+}
+
+/***************
+ * Popovers   *
+ ***************/
+.popover {
+  background-clip: initial;
+  margin: 10px;
+  padding: 2px;
+  border: 1px solid darker(@theme_base_color);
+  border-radius: 3px;
+  background-color: @theme_bg_color;
+  box-shadow: 0 1px 5px #000000;
+  text-shadow: none;
+  icon-shadow: none; 
+}
+.popover > .list, 
+.popover > .view,
+.popover > .toolbar .popover.osd > .toolbar, 
+.popover > .inline-toolbar .popover.osd > .toolbar, 
+.popover > .search-bar .popover.osd > .toolbar, 
+.popover > .location-bar .popover.osd > .toolbar,
+.popover > .toolbar .popover.osd > .inline-toolbar, 
+.popover > .inline-toolbar .popover.osd > .inline-toolbar, 
+.popover > .search-bar .popover.osd > .inline-toolbar, 
+.popover > .location-bar .popover.osd > .inline-toolbar,
+.popover > .toolbar .popover.osd > .search-bar, 
+.popover > .inline-toolbar .popover.osd > .search-bar, 
+.popover > .search-bar .popover.osd > .search-bar,
+.popover > .location-bar .popover.osd > .search-bar,
+.popover > .toolbar .popover.osd > .location-bar,
+.popover > .inline-toolbar .popover.osd > .location-bar, 
+.popover > .search-bar .popover.osd > .location-bar, 
+.popover > .location-bar .popover.osd > .location-bar {
+    border-style: none;
+    background-color: transparent; 
+}
+/* osd - on screen display*/
+.popover.osd {
+    background-image: none;
+    background-color: alpha(shade(#3D3E40, 0.85), 0.85);
+    border: 1px solid black;
+    box-shadow: none;
+    color: @theme_selected_fg_color; 
+}
+.popover.osd .toolbar {
+      background-image: none;
+      background-color: transparent;
+      border: none;
+      box-shadow: none; 
+}
+.popover.osd .button {
+      text-shadow: 0 -1px @osd_text_shadow;
+      icon-shadow: 0 -1px @osd_text_shadow; 
+}
+.popover.osd .button:active,
+.popover.osd .button:checked {
+        box-shadow: none;
+}
+.popover.osd .button:insensitive {
+        color: alpha(@theme_selected_fg_color, 0.4); 
+}
+
+.popover .list {
+  background-color: @theme_base_color; 
+}
+
+.entry.cursor-handle,
+.cursor-handle {
+  background-color: transparent;
+  background-image: none;
+  box-shadow: none;
+  border-style: none; 
+}
+.entry.cursor-handle.top,
+.cursor-handle.top {
+    -gtk-icon-source: -gtk-icontheme("selection-start-symbolic"); 
+}
+.entry.cursor-handle.bottom,
+.cursor-handle.bottom {
+    -gtk-icon-source: -gtk-icontheme("selection-end-symbolic"); 
+}
+
+
+/*********
+ * Lists *
+ *********/
+.list{
+	background-color: @theme_base_color;
+}
+.list, .list-row {
+ 
+  border-color: @window_frame; 
+}
+
+.list-row,
+.grid-child {
+  padding: 2px; }
+
+.list-row.button, .list-row.button:hover, .list-row.button:active, .list-row.button:active:hover,
+.list-row.button:selected:active, .list-row.button:selected, .list-row.button:selected:hover, .list-row.button:focus, .list-row.button:focus:active:hover {
+  border-style: none;
+  border-radius: 0;
+  box-shadow: none;
+  border-image: none;
+  border-width: 0; 
+  background-image: none;	
+}
+
+.list-row,
+.list-row:selected,
+.list-row:backdrop{
+	padding:2px;
+}
+.list-row:selected{
+	background-color: @theme_selected_bg_color;
+}
+.list-row:selected .button.flat:focus, 
+.list-row:selected .button.flat {
+
+}
+
+.list-row.button {
+  background-color: transparent; 
+}
+.list-row.button:hover {
+    background-color: alpha(@theme_selected_bg_color, 0.5);	
+}
+.list-row.button:active, .list-row.button:active:hover {
+    
+}
+.list-row.button:checked {
+    color: @theme_fg_color;
+    box-shadow: inset 0 2px 3px -1px rgba(0, 0, 0, 0.5); 
+}
+.list-row.button:selected, .list-row.button:selected:hover, .list-row.button:focus, .list-row.button:focus:hover {
+
+}
+.list-row.button:selected, .list-row:selected {
+ background-color: @theme_selected_bg_color;
+}
+.list-row.button:selected:hover {
+
+}
+.list-row.button:selected:active:hover {
+     
+}
+.list-row:selected .button.flat {
+     
+}
+.list-row:selected .button.flat:focus {
+       
+}
+.list-row:selected .button.flat:hover {
+      
+}
+.list-row:selected .button.flat:active {
+     
+}
+
+
+/**********************
+ * Window Decorations *
+ *********************/
+.window-frame {
+  border-radius: 0;
+  border-width: 20px;
+ box-shadow: 0 0 5px 3px @wm_shadow, 0 0 0 1px @window_frame; 
+  /* this is used for the resize cursor area */
+  margin: 3px; 
+}
+.window-frame:backdrop {
+    box-shadow: 0 0 5px 2px @wm_shadow, 0 0 0 1px @window_frame_inactive; 
+}
+.window-frame.tiled {
+    border-radius: 0; 
+}
+.window-frame.csd.popup {
+    border-radius: 0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2), 0 0 0 1px rgba(0, 0, 0, 0.12); 
+}
+.window-frame.csd.tooltip {
+    border-radius: 3px;
+    box-shadow: 0 1px 4px 1px rgba(0, 0, 0, 0.4); 
+}
+
+
+/**************
+ * ComboBoxes *
+ **************/
+GtkComboBox {
+  -GtkComboBox-arrow-scaling: 0.4;
+  -GtkComboBox-shadow-type: none;
+}
+GtkComboBox > .button {}
+GtkComboBox:insensitive {
+    text-shadow: none;
+    icon-shadow: none; 
+}
+GtkComboBox .menuitem {
+    text-shadow: none; 
+}
+GtkComboBox .separator {
+    -GtkWidget-wide-separators: true;
+
+}
+
+
+/**
+ * Checkboxes
+ ***/
+.check{
+	-gtk-icon-source: -gtk-scaled(url("darkelements/check-radio/check1.png"), url("darkelements/check-radio/check1.png"));
+	padding-right: 5px;
+	margin-right: 5px;  
+}
+.check:hover{
+	-gtk-icon-source: -gtk-scaled(url("darkelements/check-radio/check3.png"), url("darkelements/check-radio/check3.png"));
+	
+}
+.check:checked{
+	-gtk-icon-source: -gtk-scaled(url("darkelements/check-radio/check2.png"), url("darkelements/check-radio/check2.png"));
+	
+}
+.check:checked:prelight{
+	-gtk-icon-source: -gtk-scaled(url("darkelements/check-radio/check4.png"), url("darkelements/check-radio/check4.png"));
+	
+}
+.check:insensitive{
+	-gtk-icon-source: -gtk-scaled(url("darkelements/check-radio/check5.png"), url("darkelements/check-radio/check5.png"));
+	
+}
+.check:checked:insensitive{
+	-gtk-icon-source: -gtk-scaled(url("darkelements/check-radio/check6.png"), url("darkelements/check-radio/check6.png"));
+}
+
+.radio{
+	-gtk-icon-source: -gtk-scaled(url("darkelements/check-radio/option1.png"), url("darkelements/check-radio/option1.png"));
+	
+}
+.radio:hover{
+	-gtk-icon-source: -gtk-scaled(url("darkelements/check-radio/option3.png"), url("darkelements/check-radio/option3.png"));
+	
+}
+.radio:checked{
+	-gtk-icon-source: -gtk-scaled(url("darkelements/check-radio/option2.png"), url("darkelements/check-radio/option.png"));
+	
+}
+.radio:checked:prelight{
+	-gtk-icon-source: -gtk-scaled(url("darkelements/check-radio/option4.png"), url("darkelements/check-radio/option4.png"));
+	
+}
+.radio:insensitive{
+	-gtk-icon-source: -gtk-scaled(url("darkelements/check-radio/option5.png"), url("darkelements/check-radio/option5.png"));
+	
+}
+.radio:checked:insensitive{
+	-gtk-icon-source: -gtk-scaled(url("darkelements/check-radio/option6.png"), url("darkelements/check-radio/option6.png"));
+}
+
+
+GtkCalendar.header .button{
+	background-image: none;
+}
+
+/************
+ * Spinner
+ ************/
+@keyframes spinner{
+	to{-gtk-icon-transform: rotate(1turn);}
+}
+.spinner{
+	background-image: none;
+	background-color: blue;
+	opacity: 0;
+	-gtk-icon-source: -gtk-icontheme("process-working-symbolic");
+}
+.spinner:active{
+	opacity: 1;
+	animation: spinner 1s infinite linear;
+}
+.spinner:active:insensitive{
+	opacity: 0.5;
 }
