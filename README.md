@@ -6,4 +6,6 @@ Clone: git clone https://github.com/originalseed/darkmint.git
 
 
 copy: 
-userContent.css to ~/.mozilla/firefox/<bla_bla>/chrome 
+```php
+    userContent.css -> ~/.mozilla/firefox/<bla_bla>/chrome 
+```
